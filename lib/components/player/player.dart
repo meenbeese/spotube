@@ -46,7 +46,8 @@ class PlayerView extends HookConsumerWidget {
       (value) => value.activeTrack is LocalTrack,
     ));
     final mediaQuery = MediaQuery.of(context);
-
+    final artistList = currentTrack?.artists.split(",");
+    
     useEffect(() {
       if (mediaQuery.lgAndUp) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -219,7 +220,7 @@ class PlayerView extends HookConsumerWidget {
                                   Text(
                                     TypeConversionUtils.artists_X_String<
                                         Artist>(
-                                      currentTrack?.artists ?? [],
+                                      artistList.sublist(0, 10) ?? [],
                                     ),
                                     style: theme.textTheme.bodyMedium!.copyWith(
                                       fontWeight: FontWeight.bold,
@@ -229,7 +230,7 @@ class PlayerView extends HookConsumerWidget {
                                 else
                                   TypeConversionUtils
                                       .artists_X_ClickableArtists(
-                                    currentTrack?.artists ?? [],
+                                    artistList.sublist(0, 10) ?? [],
                                     textStyle:
                                         theme.textTheme.bodyMedium!.copyWith(
                                       fontWeight: FontWeight.bold,
